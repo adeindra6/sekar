@@ -12,6 +12,15 @@
     <title>Login & Registration</title>
   </head>
   <body>
+  <script>
+      // Check for success parameter in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const success = urlParams.get('success');
+
+      if (success === 'true') {
+        alert("Registrasi berhasil silahkan login");
+      }
+    </script>
     <div class="wrapper">
       <nav class="nav">
         <div class="nav-logo">

@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <h1 class="form-title">Registrasi</h1>
-      <form method="POST" action="registrasi_user.php">
+      <form method="POST" action="registrasi_user.php" onsubmit="return validateForm()">
         <div class="main-user-info">
           <div class="user-input-box">
             <label for="namaUser">Nama Lengkap</label>
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="form-submit-btn">
-          <input type="submit" value="registrasi" name="registrasi" id="registrasi">
+          <input type="submit" value="Registrasi" name="registrasi" id="registrasi">
         </div>
       </form>
     </div>
