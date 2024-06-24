@@ -96,7 +96,7 @@ if (isset($_POST['registrasi'])) {
   if (empty($errors)) {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hash password securely
 
-    $sql = "INSERT INTO user (id, username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (NULL, '$username', '$password', '$email', '$phoneNumber', '$nama', '$namaResto', '$rekening', '$bank', '$address', '$location', '$filePaths[ktp]', '$filePaths[fotoResto]', '$filePaths[fotoBukuRekening]', 'user', NOW(), NOW());";
+    $sql = "INSERT INTO user (id, username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (NULL, '$username', '$password', '$email', '$phoneNumber', '$nama', '$namaResto', '$rekening', '$bank', '$address', '$location', '$filePaths[ktp]', '$filePaths[fotoResto]', '$filePaths[fotoBukuRekening]', 'umkm', NOW(), NOW());";
 
     if (mysqli_query($conn, $sql)) {
 	

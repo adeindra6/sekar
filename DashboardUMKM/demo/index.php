@@ -1,3 +1,9 @@
+<?php
+  session_start();
+
+  // Check if user is logged in and has the 'user' role
+  if (isset($_SESSION['username']) && $_SESSION['role'] === 'umkm') {
+?>
 <!DOCTYPE html>
 <html lang="en" class="has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded">
 <head>
@@ -681,3 +687,9 @@
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
 </body>
 </html>
+<?php
+  } else {
+    // Redirect to login page or display error message
+    header("Location: ../Login/index.php"); // Replace with your login page path
+  }
+?>
