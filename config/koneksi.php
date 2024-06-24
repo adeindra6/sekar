@@ -5,10 +5,11 @@ $password = "ngentotBlok69@"; // Your database password
 $dbname = "healthy"; // Your database name
 
 // Create connection
-$koneksi = new mysqli($servername, $username, $password, $dbname);
+$db = mysqli_connect($servername, $username, $password, $dbname);
 
-// Check connection
-if ($koneksi->connect_error) {
-    die("Connection failed: " . $koneksi->connect_error);
+if( !$db ){
+    die("Gagal terhubung dengan database: " . mysqli_connect_error());
 }
+
+
 ?>
