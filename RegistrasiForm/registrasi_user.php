@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $created = date('Y-m-d H:i:s');
 
     // Prepare an SQL statement for insertion
-    $stmt = $koneksi->prepare("INSERT INTO user (username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (?, ?, ?, ?, ?, NULL, NULL, NULL, ?, NULL, NULL, NULL, NULL, 'user', ?, ?)");
+    $stmt = $koneksi->prepare("INSERT INTO user (username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES ($username, $hashedPassword, $email, $nomor_telepon, $namaUser, NULL, NULL, NULL, $alamat, NULL, NULL, NULL, NULL, 'user', NOW(), NOW())");
 
     if ($stmt) {
         // Bind parameters
-        $stmt->bind_param("ssssssss", $username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat, $created, $created);
+        // $stmt->bind_param("ssssssss", $username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat, $created, $created);
 		echo $username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat, $created, $created;
 		echo "Jalan";
 		$stmt->execute();
