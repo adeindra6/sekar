@@ -10,7 +10,7 @@ $password = $_POST['password'];
 $namaUser = $_POST['owner'];
 $email = $_POST['email'];
 $nomor_telepon = $_POST['nomorTeleponUMKM'];
-$lokasi = $_POST['lokasi'];
+
 $alamat = $_POST['alamatUMKM'];
 
 // Hash the password using password_hash (recommended)
@@ -22,26 +22,26 @@ $created = date('Y-m-d H:i:s');
 $stmt = $koneksi->prepare("INSERT INTO user (username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (?, ?, ?, ?, ?, NULL, NULL, NULL, ?, NULL, NULL, NULL, NULL, 'user', NOW(), NOW())");
 
 if ($stmt) {
-// Bind parameters
-$stmt->bind_param("ssssss", $username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat);
+	// Bind parameters
+	$stmt->bind_param("ssssss", $username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat);
 
-// Execute the statement
-if ($stmt->execute()) {
-// Redirect to login page after successful registration
-echo "Registration successful!";
-      header("Location: ../Login/index.html");
-      exit;
-    } else {
-// Handle execution error
-echo "Error: " . $stmt->error;
-    }
+	// Execute the statement
+	if ($stmt->execute()) {
+		// Redirect to login page after successful registration
+		echo "Registration successful!";
+		header("Location: ../Login/index.html");
+		exit;
+	} else {
+		// Handle execution error
+		echo "Error: " . $stmt->error;
+	}
 
-// Close the statement
-$stmt->close();
-} else {
-// Handle statement preparation error
-echo "Error: " . $koneksi->error;
-}
+	// Close the statement
+	$stmt->close();
+	} else {
+		// Handle statement preparation error
+		echo "Error: " . $koneksi->error;
+	}
 }
 
 // Close the database connection
