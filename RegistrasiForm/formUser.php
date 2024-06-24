@@ -43,7 +43,7 @@
           <div class="user-input-box">
             <label for="lokasi">Kota/Kabupaten</label>
             <select name="lokasi" id="lokasi">
-              <option value="Seleman">Seleman</option>
+              <option value="Sleman">Seleman</option>
               <option value="Bantul">Bantul</option>
               <option value="Jogja">Jogja</option>
             </select>
