@@ -1,10 +1,14 @@
-<?php 
- 
-$koneksi = mysqli_connect("103.193.178.139", "user_sdtb", "ngentotBlok69@", "healthy");
- 
+<?php
+$servername = "103.193.178.139";
+$username = "user_sdtb"; // Your database username
+$password = "ngentotBlok69@"; // Your database password
+$dbname = "healthy"; // Your database name
+
+// Create connection
+$koneksi = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
-if (mysqli_connect_errno()){
-	echo "Koneksi database gagal : " . mysqli_connect_error();
+if ($koneksi->connect_error) {
+    die("Connection failed: " . $koneksi->connect_error);
 }
- 
 ?>
