@@ -20,7 +20,9 @@
 
       if (success === 'true') {
         alert("Registrasi berhasil silahkan login");
-      } elseif(failed != null) {
+      } 
+      
+      if(failed != null) {
         alert(failed);
       }
       
