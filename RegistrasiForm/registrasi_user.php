@@ -23,23 +23,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt) {
         // Bind parameters
-        $stmt->bind_param("ssssssss", $username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat, $created, $created);
+        $stmt->bind_param($username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat, $created, $created);
 		echo $username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat, $created, $created;
 		echo "Jalan";
+		$stmt->execute();
 
         // Execute the statement
-        if ($stmt->execute()) {
-            // Redirect to login page after successful registration
-			echo "Jalan lagi";
-            header("Location: ../Login/index.html");
-            exit;
-        } else {
-            // Handle execution error
-            echo "Error: " . $stmt->error;
-        }
+        // if () {
+        //     // Redirect to login page after successful registration
+		// 	echo "Jalan lagi";
+        //     header("Location: ../Login/index.html");
+        //     exit;
+        // } else {
+        //     // Handle execution error
+        //     echo "Error: " . $stmt->error;
+        // }
 
-        // Close the statement
-        $stmt->close();
+        // // Close the statement
+        // $stmt->close();
     } else {
         // Handle statement preparation error
         echo "Error: " . $koneksi->error;
