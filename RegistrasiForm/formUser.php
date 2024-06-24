@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <h1 class="form-title">Registrasi</h1>
-      <form action="Registrasi">
+      <form method="post" action="registrasi_user.php">
         <div class="main-user-info">
           <div class="user-input-box">
             <label for="namaUser">Nama Lengkap</label>
