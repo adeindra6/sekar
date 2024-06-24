@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="form-submit-btn">
-          <input type="submit" value="Registrasi">
+          <input type="submit" value="registrasi" name="registrasi" id="registrasi">
         </div>
       </form>
     </div>
