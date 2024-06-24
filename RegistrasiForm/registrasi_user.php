@@ -20,13 +20,14 @@ $created = date('Y-m-d H:i:s');
 $data = mysqli_query($koneksi, "INSERT INTO user (username ⁠, ⁠ password ⁠, ⁠ email ⁠, ⁠ telepon ⁠, ⁠ nama ⁠, ⁠ nama_resto ⁠, ⁠ no_rekening ⁠, ⁠ bank_umkm ⁠, ⁠ alamat ⁠, ⁠ kota ⁠, ⁠ kartu_identitas ⁠, ⁠ foto_resto ⁠, ⁠ buku_rekening ⁠, ⁠ role ⁠, ⁠ created_at ⁠, ⁠ updated_at ⁠) VALUES ('$username', '$md5Password', '$email', '$nomor_telepon', '$namaUser', NULL, NULL, NULL, '$alamat', NULL, NULL, NULL, NULL, 'user', '$created', '$created'");
  
 // // menghitung jumlah data yang ditemukan
-// $cek = mysqli_num_rows($data);
+$cek = mysqli_num_rows($data);
  
-// if($cek > 0){
-// 	$_SESSION['username'] = $username;
-// 	$_SESSION['status'] = "login";
-// 	header("location:admin/index.php");
-// }else{
-// 	header("location:index.php?pesan=gagal");
-// }
+if($cek > 0){
+	// $_SESSION['username'] = $username;
+ 	// $_SESSION['status'] = "login";
+ 	header("location:../Login/index.php");
+ }
+//  else{
+//  	header("location:index.php?pesan=gagal");
+//  }
 ?>
