@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include '../config/koneksi.php';
+require '../config/koneksi.php';
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
