@@ -21,7 +21,7 @@
       if (success === 'true') {
         alert("Registrasi berhasil silahkan login");
       } elseif(failed != null) {
-        alert(failed)
+        alert(failed);
       }
       
     </script>
