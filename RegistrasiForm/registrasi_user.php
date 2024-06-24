@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt) {
         // Bind parameters
         $stmt->bind_param("ssssssss", $username, $hashedPassword, $email, $nomor_telepon, $namaUser, $alamat, $created, $created);
+		echo "Jalan";
 
         // Execute the statement
         if ($stmt->execute()) {
