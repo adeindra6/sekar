@@ -16,10 +16,14 @@
       // Check for success parameter in URL
       const urlParams = new URLSearchParams(window.location.search);
       const success = urlParams.get('success');
+      const failed = urlParams.get('failed');
 
       if (success === 'true') {
         alert("Registrasi berhasil silahkan login");
+      } elseif(failed != null) {
+        alert(failed)
       }
+      
     </script>
     <div class="wrapper">
       <nav class="nav">
@@ -53,16 +57,12 @@
             -->
             <header>Login</header>
           </div>
-          <div class="input-box">
-            <input
-              type="text"
-              class="input-field"
-              placeholder="Username or Email"
-            />
+          <form method="post" action="login_handler.php"> <div class="input-box">
+            <input type="text" class="input-field" name="username" id="username" placeholder="Username or Email" required />
             <i class="bx bx-user"></i>
           </div>
           <div class="input-box">
-            <input type="password" class="input-field" placeholder="Password" />
+            <input type="password" class="input-field" name="password" id="password" placeholder="Password" required />
             <i class="bx bx-lock-alt"></i>
           </div>
           <div class="input-box">
@@ -77,7 +77,7 @@
               <label><a href="#">Forgot password?</a></label>
             </div>
           </div>
-        </div>
+        </form>
 
         <!------------------- registration form -------------------------->
         <div class="register-container" id="register">

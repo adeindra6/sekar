@@ -1,3 +1,10 @@
+<?php
+  session_start();
+
+  // Check if user is logged in and has the 'user' role
+  if (isset($_SESSION['username']) && $_SESSION['role'] === 'user') {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -333,3 +340,9 @@
     <script src="./js/app.js"></script>
   </body>
 </html>
+<?php
+  } else {
+    // Redirect to login page or display error message
+    header("Location: ../Login/index.php"); // Replace with your login page path
+  }
+?>
