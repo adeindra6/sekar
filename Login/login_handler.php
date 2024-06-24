@@ -30,7 +30,7 @@ if ($result->num_rows === 1) {
   if ($user['role'] === 'user') {
     header("Location: ../DashboardAdmin/index.php"); // Redirect to admin dashboard
   } elseif ($user['role'] === 'umkm') {
-    header("Location: ../DashboardUMKM/index.php"); // Redirect to UMKM dashboard
+    header("Location: ../DashboardUMKM/demo/index.php"); // Redirect to UMKM dashboard
   } else {
     // Handle invalid role (optional: display error or default to a page)
     echo "Invalid user role.";
