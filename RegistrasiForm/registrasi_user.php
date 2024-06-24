@@ -4,7 +4,7 @@ include '../config/koneksi.php';
 
 // Check if the form is submitted
 
-if(isset($_POST['registrasi'])) {
+// if(isset($_POST['registrasi'])) {
 	// Capture data from the form
 	$username = $_POST['usernameUser'];
 	$password = $_POST['password'];
@@ -14,9 +14,9 @@ if(isset($_POST['registrasi'])) {
 	$alamat = $_POST['alamatUMKM'];
 
 	// Hash the password using password_hash (recommended)
-	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-	date_default_timezone_set('Asia/Jakarta');
-	$created = date('Y-m-d H:i:s');
+	// $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+	// date_default_timezone_set('Asia/Jakarta');
+	// $created = date('Y-m-d H:i:s');
 
 	// Prepare an SQL statement for insertion
 	$sql = "INSERT INTO user (id, username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (NULL, 'rauf', 'tes', 'email', '0812', 'raufendro', 'kaktus', '1234', 'BCA', 'alamat', 'kota', 'kartu', 'foto', 'buku', 'role', '2024-06-24 21:25:13', '2024-06-24 21:25:13');";
@@ -35,8 +35,8 @@ if(isset($_POST['registrasi'])) {
     }
 
 
-} else {
-    die("Akses dilarang...");
-}
+// } else {
+//     die("Akses dilarang...");
+// }
 
 ?>
