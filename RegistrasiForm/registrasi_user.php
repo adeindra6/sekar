@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             // Redirect to login page after successful registration
 			echo "Jalan lagi";
-            header("Location: ../Login/index.php");
+            header("Location: ../Login/index.html");
             exit;
         } else {
             // Handle execution error
