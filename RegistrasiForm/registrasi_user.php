@@ -5,7 +5,7 @@ include '../config/koneksi.php';
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Capture data from the form
-    $username = $_POST['usernameUMKM'];
+    $username = $_POST['usernameUser'];
     $password = $_POST['password'];
     $namaUser = $_POST['owner'];
     $email = $_POST['email'];

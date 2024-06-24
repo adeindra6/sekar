@@ -22,7 +22,7 @@
           <div class="user-input-box">
             <label for="usernameUser">Username</label>
             <input type="text"
-                    id="usernameUMKM"
+                    id="usernameUser"
                     name="usernameUser"
                     placeholder="Masukkan Username"/>
           </div>
