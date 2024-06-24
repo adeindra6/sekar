@@ -29,8 +29,8 @@
           <div class="user-input-box">
             <label for="email">Email</label>
             <input type="email"
-                    id="emailUMKM"
-                    name="emailUMKM"
+                    id="email"
+                    name="email"
                     placeholder="Masukkan Email"/>
           </div>
           <div class="user-input-box">
