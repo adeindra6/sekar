@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include '../config/koneksi.php';
+require_once("../config/koneksi.php");
 
 // Check if the form is submitted
 
@@ -13,6 +13,7 @@ include '../config/koneksi.php';
 	$nomor_telepon = $_POST['nomorTeleponUMKM'];
 	$alamat = $_POST['alamatUMKM'];
 	$kota = $_POST['lokasi'];
+	echo $username;
 
 	// Hash the password using password_hash (recommended)
 	// $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -24,6 +25,7 @@ include '../config/koneksi.php';
 	// $sql = "INSERT INTO user (id, username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (NULL, '$username', '$password', '$email', '$nomor_telepon', '$namaUser', NULL, NULL, NULL, '$alamat, '$kota', NULL, NULL, NULL, 'user', 'NOW()', 'NOW()');";
     $query = mysqli_query($db, $sql);
 	echo "tes jalan";
+	echo $query;
 
     // apakah query simpan berhasil?
     if( $query ) {

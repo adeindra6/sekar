@@ -5,10 +5,12 @@ $password = "ngentotBlok69@"; // Your database password
 $dbname = "healthy"; // Your database name
 
 // Create connection
-$db = mysqli_connect($servername, $username, $password, $dbname);
-
-if( !$db ){
-    die("Gagal terhubung dengan database: " . mysqli_connect_error());
+try {    
+    //create PDO connection 
+    $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+} catch(PDOException $e) {
+    //show error
+    die("Terjadi masalah: " . $e->getMessage());
 }
 
 
