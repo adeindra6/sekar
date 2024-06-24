@@ -20,7 +20,8 @@ include '../config/koneksi.php';
 	// $created = date('Y-m-d H:i:s');
 
 	// Prepare an SQL statement for insertion
-	$sql = "INSERT INTO user (id, username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (NULL, '$username', '$password', '$email', '$nomor_telepon', '$namaUser', NULL, NULL, NULL, '$alamat, '$kota', NULL, NULL, NULL, 'user', 'NOW()', 'NOW()');";
+	$sql = "INSERT INTO user (id, username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (NULL, 'rauf', 'tes', 'email', '0812', 'raufendro', 'kaktus', '1234', 'BCA', 'alamat', 'kota', 'kartu', 'foto', 'buku', 'role', '2024-06-24 21:25:13', '2024-06-24 21:25:13');";
+	// $sql = "INSERT INTO user (id, username, password, email, telepon, nama, nama_resto, no_rekening, bank_umkm, alamat, kota, kartu_identitas, foto_resto, buku_rekening, role, created_at, updated_at) VALUES (NULL, '$username', '$password', '$email', '$nomor_telepon', '$namaUser', NULL, NULL, NULL, '$alamat, '$kota', NULL, NULL, NULL, 'user', 'NOW()', 'NOW()');";
     $query = mysqli_query($db, $sql);
 	echo "tes jalan";
 
