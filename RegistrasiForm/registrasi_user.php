@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the statement
         if ($stmt->execute()) {
             // Redirect to login page after successful registration
+			echo "Jalan lagi";
             header("Location: ../Login/index.php");
             exit;
         } else {
@@ -45,5 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Close the database connection
+echo "Tutup";
 $koneksi->close();
 ?>
