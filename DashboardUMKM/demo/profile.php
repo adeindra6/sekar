@@ -264,7 +264,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                    <input type="text" autocomplete="on" name="name" value="<?php  echo $_SESSION['nama']; ?>" class="input" required>
+                    <input type="text" autocomplete="on" name="nama" id="nama" value="<?php  echo $_SESSION['nama']; ?>" class="input" required>
                     </div>
                     <p class="help">Required. Your name</p>
                   </div>
@@ -277,7 +277,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="<?php  echo $_SESSION['nama_resto']; ?>" class="input" required>
+                      <input type="text" autocomplete="on" name="nama_resto" id="nama_resto" value="<?php  echo $_SESSION['nama_resto']; ?>" class="input" required>
                     </div>
                     <p class="help">Required. Your UMKM</p>
                   </div>
@@ -290,7 +290,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <input type="email" autocomplete="on" name="email" value="<?php  echo $_SESSION['email']; ?>" class="input" required>
+                      <input type="email" autocomplete="on" name="email" id="email" value="<?php  echo $_SESSION['email']; ?>" class="input" required>
                     </div>
                     <p class="help">Required. Your e-mail</p>
                   </div>
@@ -304,7 +304,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="<?php  echo $_SESSION['telepon']; ?>" class="input" required>
+                      <input type="text" autocomplete="on" name="telepon" id="telepon" value="<?php  echo $_SESSION['telepon']; ?>" class="input" required>
                     </div>
                     <p class="help">Required. Your Phone Number</p>
                   </div>
@@ -317,7 +317,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="<?php  echo $_SESSION['bank_umkm']; ?>" class="input" required>
+                      <input type="text" autocomplete="on" name="bank" id="bank" value="<?php  echo $_SESSION['bank_umkm']; ?>" class="input" required>
                     </div>
                     <p class="help">Required. Your Bank Name</p>
                   </div>
@@ -330,7 +330,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="<?php  echo $_SESSION['no_rekening']; ?>" class="input" required>
+                      <input type="text" autocomplete="on" name="rekening" id="rekening" value="<?php  echo $_SESSION['no_rekening']; ?>" class="input" required>
                     </div>
                     <p class="help">Required. Your Account Number</p>
                   </div>
@@ -343,7 +343,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <textarea class="textarea" autocomplete="on" name="name"  class="input" required><?php  echo $_SESSION['alamat']; ?></textarea>
+                      <textarea class="textarea" autocomplete="on" name="alamat" id="alamat" class="input" required><?php  echo $_SESSION['alamat']; ?></textarea>
                     </div>
                     <p class="help">Required. Your Address</p>
                   </div>
@@ -355,7 +355,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <button type="submit" class="button is-primary">
+                      <button type="submit" class="button is-primary" value="editprofil" name="editprofil" id="editprofil">
                         Submit
                       </button>
                     </div>
