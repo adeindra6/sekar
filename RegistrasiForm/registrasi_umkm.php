@@ -49,7 +49,7 @@ if (isset($_POST['registrasi'])) {
       // Move uploaded file to the destination directory
       $uploadPath = $uploadDir . $newFileName;
       if (move_uploaded_file($tmpName, $uploadPath)) {
-        $filePaths[$fileKey] = $uploadPath; // Store the path in the array
+        $filePaths[$fileKey] = str_replace("..","",$uploadPath); // Store the path in the array
         echo "File '$fileName' berhasil diupload.";
         echo $filePaths[$fileKey];
 

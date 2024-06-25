@@ -1,10 +1,17 @@
+<?php
+  session_start();
+
+  // Check if user is logged in and has the 'user' role
+  if (isset($_SESSION['username']) && $_SESSION['role'] === 'umkm') {
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profile - Admin UMKM</title>
+  <title>Forms - Admin UMKM</title>
 
   <!-- Bulma is included -->
   <link rel="stylesheet" href="css/main.min.css">
@@ -30,7 +37,7 @@
       </a>
     </div>
     <div class="navbar-menu fadeIn animated faster" id="navbar-menu">
-      <div class="navbar-end">
+      <!-- <div class="navbar-end">
         <div class="navbar-item has-dropdown has-dropdown-with-icons has-divider is-hoverable">
           <a class="navbar-link is-arrowless">
             <span class="icon">
@@ -42,7 +49,7 @@
             </span>
           </a>
           <div class="navbar-dropdown">
-            <a href="profile.html" class="navbar-item is-active">
+            <a href="profile.html" class="navbar-item">
               <span class="icon"><i class="mdi mdi-account"></i></span>
               <span>My Profile</span>
             </a>
@@ -60,7 +67,8 @@
               <span>Log Out</span>
             </a>
           </div>
-        </div>
+        </div> -->
+        <div class="navbar-end">
         <div class="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
           <a class="navbar-link is-arrowless">
             <div class="is-user-avatar">
@@ -72,7 +80,7 @@
             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
           </a>
           <div class="navbar-dropdown">
-            <a href="profile.html" class="navbar-item is-active">
+            <a href="profile.php" class="navbar-item">
               <span class="icon"><i class="mdi mdi-account"></i></span>
               <span>My Profile</span>
             </a>
@@ -84,21 +92,28 @@
               <span class="icon"><i class="mdi mdi-email"></i></span>
               <span>Messages</span>
             </a>
-            <hr class="navbar-divider">
+            <!-- <hr class="navbar-divider">
             <a class="navbar-item">
               <span class="icon"><i class="mdi mdi-logout"></i></span>
               <span>Log Out</span>
-            </a>
+            </a> -->
           </div>
         </div>
+      </div>
         <a href="https://justboil.me/bulma-admin-template/free-html-dashboard/" title="About" class="navbar-item has-divider is-desktop-icon-only">
           <span class="icon"><i class="mdi mdi-help-circle-outline"></i></span>
           <span>About</span>
         </a>
-        <a title="Log out" class="navbar-item is-desktop-icon-only">
+        <a title="Log out" class="navbar-item is-desktop-icon-only" onclick="logout()">
           <span class="icon"><i class="mdi mdi-logout"></i></span>
           <span>Log out</span>
         </a>
+        
+        <script>
+        function logout() {
+          window.location.href = "logout.php"; 
+        }
+        </script>
       </div>
     </div>
   </nav>
@@ -112,28 +127,28 @@
       <p class="menu-label">General</p>
       <ul class="menu-list">
         <li>
-          <a href="index.html" class="has-icon">
+          <a href="index.php" class="has-icon">
             <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
             <span class="menu-item-label">Dashboard</span>
           </a>
         </li>
       </ul>
-      <p class="menu-label">Menu</p>
+      <p class="menu-label">Examples</p>
       <ul class="menu-list">
         <li>
-          <a href="tables.html" class="has-icon">
+          <a href="tables.php" class="has-icon">
             <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span>
             <span class="menu-item-label">Tables</span>
           </a>
         </li>
         <li>
-          <a href="forms.html" class="has-icon">
+          <a href="forms.php" class="is-active has-icon">
             <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
             <span class="menu-item-label">Forms</span>
           </a>
         </li>
         <li>
-          <a href="profile.html" class="is-active has-icon">
+          <a href="profile.php" class="has-icon">
             <span class="icon"><i class="mdi mdi-account-circle"></i></span>
             <span class="menu-item-label">Profile</span>
           </a>
@@ -183,7 +198,7 @@
         <div class="level-item">
           <ul>
             <li>Admin</li>
-            <li>Profile</li>
+            <li>Forms</li>
           </ul>
         </div>
       </div>
@@ -204,7 +219,7 @@
       <div class="level">
         <div class="level-left">
           <div class="level-item"><h1 class="title">
-            Profile
+            Forms
           </h1></div>
         </div>
         <div class="level-right" style="display: none;">
@@ -214,242 +229,182 @@
     </div>
   </section>
   <section class="section is-main-section">
-    <div class="tile is-ancestor">
-      <div class="tile is-parent">
-        <div class="card tile is-child">
-          <header class="card-header">
-            <p class="card-header-title">
-              <span class="icon"><i class="mdi mdi-account-circle default"></i></span>
-              Edit Profile
-            </p>
-          </header>
-          <div class="card-content">
-            <form>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal"><label class="label">Avatar</label></div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="field file">
-                      <label class="upload control">
-                        <a class="button is-primary">
-                          <span class="icon"><i class="mdi mdi-upload default"></i></span>
-                          <span>Pick a file</span>
-                        </a>
-                        <input type="file">
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                  <label class="label">Nama</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="John Doe" class="input" required>
-                    </div>
-                    <p class="help">Required. Your name</p>
-                  </div>
-                </div>
-              </div>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                  <label class="label">UMKM</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="Waroeng Sehat" class="input" required>
-                    </div>
-                    <p class="help">Required. Your UMKM</p>
-                  </div>
-                </div>
-              </div>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                  <label class="label">E-mail</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input type="email" autocomplete="on" name="email" value="user@example.com" class="input" required>
-                    </div>
-                    <p class="help">Required. Your e-mail</p>
-                  </div>
-                </div>
-              </div>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                  <label class="label">Password</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input type="password" name="name" value="WaroengSehat22" class="input" required>
-                    </div>
-                    <p class="help">Required. Your Password</p>
-                  </div>
-                </div>
-              </div>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                  <label class="label">Telepon</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="081234567892" class="input" required>
-                    </div>
-                    <p class="help">Required. Your Phone Number</p>
-                  </div>
-                </div>
-              </div>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                  <label class="label">Bank</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="BCA" class="input" required>
-                    </div>
-                    <p class="help">Required. Your Bank Name</p>
-                  </div>
-                </div>
-              </div>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                  <label class="label">Rekening</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input type="text" autocomplete="on" name="name" value="1234567" class="input" required>
-                    </div>
-                    <p class="help">Required. Your Account Number</p>
-                  </div>
-                </div>
-              </div>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                  <label class="label">Alamat</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <textarea class="textarea" autocomplete="on" name="name" value="Jalan Kaliurang KM 14" class="input" required></textarea>
-                    </div>
-                    <p class="help">Required. Your Address</p>
-                  </div>
-                </div>
-              </div>
-              <hr>
-              <div class="field is-horizontal">
-                <div class="field-label is-normal"></div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <button type="submit" class="button is-primary">
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="tile is-parent">
-        <div class="card tile is-child">
-          <header class="card-header">
-            <p class="card-header-title">
-              <span class="icon"><i class="mdi mdi-account default"></i></span>
-              Profile
-            </p>
-          </header>
-          <div class="card-content">
-            <div class="is-user-avatar image has-max-width is-aligned-center">
-              <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe">
-            </div>
-            <hr>
-            <div class="field">
-              <label class="label">Name</label>
-              <div class="control is-clearfix">
-                <input type="text" readonly value="John Doe" class="input is-static">
-              </div>
-            </div>
-            <hr>
-            <div class="field">
-              <label class="label">E-mail</label>
-              <div class="control is-clearfix">
-                <input type="text" readonly value="user@example.com" class="input is-static">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
-          <span class="icon"><i class="mdi mdi-lock default"></i></span>
-          Change Password
+          <span class="icon"><i class="mdi mdi-ballot"></i></span>
+          Menu
         </p>
       </header>
       <div class="card-content">
-        <form>
+        <form method="get">
           <div class="field is-horizontal">
             <div class="field-label is-normal">
-              <label class="label">Current password</label>
+              <label class="label">Nama</label>
             </div>
             <div class="field-body">
               <div class="field">
-                <div class="control">
-                  <input type="password" name="password_current" autocomplete="current-password" class="input" required>
-                </div>
-                <p class="help">Required. Your current password</p></div>
+                <p class="control is-expanded has-icons-left">
+                  <input class="input" type="text" placeholder="">
+                  <!--<span class="icon is-small is-left"><i class="mdi mdi-account"></i></span>-->
+                </p>
+              </div>
+              <!--<div class="field">
+                <p class="control is-expanded has-icons-left has-icons-right">
+                  <input class="input is-success" type="email" placeholder="Email" value="alex@smith.com">
+                  <span class="icon is-small is-left"><i class="mdi mdi-mail"></i></span>
+                  <span class="icon is-small is-right"><i class="mdi mdi-check"></i></span>
+                </p>
+              </div>-->
             </div>
           </div>
-          <hr>
-          <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label">New password</label>
-            </div>
+          <!--<div class="field is-horizontal">
+            <div class="field-label"></div>
             <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <input type="password" autocomplete="new-password" name="password" class="input" required>
+              <div class="field is-expanded">
+                <div class="field has-addons">
+                  <p class="control">
+                    <a class="button is-static">
+                      +44
+                    </a>
+                  </p>
+                  <p class="control is-expanded">
+                    <input class="input" type="tel" placeholder="Your phone number">
+                  </p>
                 </div>
-                <p class="help">Required. New password</p>
+                <p class="help">Do not enter the first zero</p>
               </div>
             </div>
           </div>
           <div class="field is-horizontal">
             <div class="field-label is-normal">
-              <label class="label">Confirm password</label>
+              <label class="label">Department</label>
             </div>
             <div class="field-body">
-              <div class="field">
+              <div class="field is-narrow">
                 <div class="control">
-                  <input type="password" autocomplete="new-password" name="password_confirmation" class="input" required>
+                  <div class="select is-fullwidth">
+                    <select>
+                      <option>Business development</option>
+                      <option>Marketing</option>
+                      <option>Sales</option>
+                    </select>
+                  </div>
                 </div>
-                <p class="help">Required. New password one more time</p>
+              </div>
+            </div>
+          </div>-->
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Kategori</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select>
+                      <option>Diabetes</option>
+                      <option>Jantung</option>
+                      <option>Bulking</option>
+                      <option>Cutting</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <hr>
           <div class="field is-horizontal">
-            <div class="field-label is-normal"></div>
+            <div class="field-label is-normal">
+              <label class="label">Kalori</label>
+            </div>
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <button type="submit" class="button is-primary">
-                    Submit
-                  </button>
+                  <input class="input is-danger" type="text">
+                </div>
+                <p class="help is-danger">
+                  This field is required
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Jumlah</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input class="input is-danger" type="text">
+                </div>
+                <p class="help is-danger">
+                  This field is required
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Harga</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input class="input is-danger" type="text">
+                </div>
+                <p class="help is-danger">
+                  This field is required
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal"><label class="label">Gambar</label></div>
+            <div class="field-body">
+              <div class="field">
+                <div class="field file">
+                  <label class="upload control">
+                    <a class="button is-primary">
+                      <span class="icon"><i class="mdi mdi-upload default"></i></span>
+                      <span>Pick a file</span>
+                    </a>
+                    <input type="file">
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Deskripsi</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <textarea class="textarea" placeholder="Terbuat dari tepung glutten-free"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <!-- Left empty for spacing -->
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button type="submit" class="button is-primary">
+                      <span>Submit</span>
+                    </button>
+                  </div>
+                  <div class="control">
+                    <button type="button" class="button is-primary is-outlined">
+                      <span>Reset</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -457,6 +412,91 @@
         </form>
       </div>
     </div>
+    <!--<div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          <span class="icon"><i class="mdi mdi-ballot-outline default"></i></span>
+          Custom elements
+        </p>
+      </header>
+      <div class="card-content">
+        <div class="field has-check is-horizontal">
+          <div class="field-label"><label class="label">Checkbox</label></div>
+          <div class="field-body">
+            <div class="field">
+              <div class="field is-grouped-multiline is-grouped">
+                <div class="control">
+                  <label class="b-checkbox checkbox"><input type="checkbox" value="lorem">
+                    <span class="check is-primary"></span>
+                    <span class="control-label">Lorem</span>
+                  </label>
+                </div>
+                <div class="control">
+                  <label class="b-checkbox checkbox"><input type="checkbox" value="ipsum">
+                    <span class="check is-primary"></span>
+                    <span class="control-label">Ipsum</span>
+                  </label>
+                </div>
+                <div class="control">
+                  <label class="b-checkbox checkbox"><input type="checkbox" value="dolore">
+                    <span class="check is-primary"></span>
+                    <span class="control-label">Dolore</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="field has-check is-horizontal">
+          <div class="field-label"><label class="label">Radio</label></div>
+          <div class="field-body">
+            <div class="field">
+              <div class="field is-grouped-multiline is-grouped">
+                <div class="control"><label class="b-radio radio"><input type="radio" name="sample-radio" value="one">
+                  <span class="check"></span>
+                  <span class="control-label">One</span>
+                </label></div>
+                <div class="control"><label class="b-radio radio"><input type="radio" name="sample-radio" value="two">
+                  <span class="check"></span>
+                  <span class="control-label">Two</span>
+                </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="field is-horizontal">
+          <div class="field-label"><label class="label">Switch</label></div>
+          <div class="field-body">
+            <div class="field">
+              <label class="switch is-rounded"><input type="checkbox" value="false">
+                <span class="check"></span>
+                <span class="control-label">Default</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal"><label class="label">File</label></div>
+          <div class="field-body">
+            <div class="field">
+              <div class="field file">
+                <label class="upload control">
+                  <a class="button is-primary">
+                    <span class="icon"><i class="mdi mdi-upload"></i></span>
+                    <span>Pick a file</span>
+                  </a>
+                  <input type="file">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
   </section>
 
   <footer class="footer">
@@ -510,3 +550,9 @@
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
 </body>
 </html>
+<?php
+  } else {
+    // Redirect to login page or display error message
+    header("Location: ../../Login/index.php"); // Replace with your login page path
+  }
+?>

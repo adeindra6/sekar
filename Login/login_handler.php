@@ -24,8 +24,10 @@ if ($result->num_rows === 1) {
 
   // Login successful (redirect based on role)
   session_start();
-  $_SESSION['username'] = $username; // Store username in session
-  $_SESSION['role'] = $user['role']; // Store user role in session
+  $_SESSION = $user;
+  // $_SESSION['username'] = $username; // Store username in session
+  // $_SESSION['role'] = $user['role']; // Store user role in session
+  // $_SESSION['nama'] = $user['nama']; // Store user role in session
 
   if ($user['role'] === 'user') {
     header("Location: ../DashboardAdmin/index.php"); // Redirect to admin dashboard
