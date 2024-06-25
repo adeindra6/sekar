@@ -35,7 +35,7 @@
       <div class="sidebar-user">
         <div class="sidebar-user-info">
           <img src="./images/user-image.jpg" alt="User picture" class="profile-image" />
-          <div class="sidebar-user-name">Sekar Kinasih</div>
+          <div class="sidebar-user-name"><?php echo $_SESSION['nama'];?></div>
         </div>
         <button class="btn btn-outline">
           <i class="bx bx-log-out bx-flip-horizontal"></i>
