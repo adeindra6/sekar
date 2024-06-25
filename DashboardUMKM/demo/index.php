@@ -1,7 +1,27 @@
 <?php
-  session_start();
+   require_once("../../config/koneksi.php");
+   session_start();
+   $sql = "SELECT COUNT(id) as orderhariini, SUM(total_bayar) as pendapatanhariini FROM order_barang"; // Replace with your actual table name
+   $stmt = $conn->prepare($sql);
+   $stmt->execute();
+$result = $stmt->get_result();
+$datanya = $result->fetch_assoc();
 
-  // Check if user is logged in and has the 'user' role
+
+
+
+$sql2 = "SELECT item_pembelian, jumlah_pembelian FROM order_barang";
+$result2 = mysqli_query($conn, $sql2);
+
+// Extract data into an array
+$data2 = array();
+$row = mysqli_fetch_assoc($result2);
+  print_r($row);
+  $data2[] = array("label" => $row["item_pembelian"], "value" => $row["jumlah_pembelian"]);
+
+print_r($data2);
+$chart_data = json_encode($data2);
+print_r($chart_data);
   if (isset($_SESSION['username']) && $_SESSION['role'] === 'umkm') {
 ?>
 <!DOCTYPE html>
@@ -11,6 +31,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin UMKM</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Bulma is included -->
   <link rel="stylesheet" href="css/main.min.css">
@@ -237,10 +258,10 @@
             <div class="level is-mobile">
               <div class="level-item">
                 <div class="is-widget-label"><h3 class="subtitle is-spaced">
-                  Product
+                  Penjualan hari ini
                 </h3>
                   <h1 class="title">
-                    735
+                    <?php echo $datanya['orderhariini']; ?>
                   </h1>
                 </div>
               </div>
@@ -259,10 +280,10 @@
             <div class="level is-mobile">
               <div class="level-item">
                 <div class="is-widget-label"><h3 class="subtitle is-spaced">
-                  Sales
+                  Pendapatan Hari ini
                 </h3>
                   <h1 class="title">
-                    Rp17.550.000
+                    Rp<?php echo $datanya['pendapatanhariini']?>
                   </h1>
                 </div>
               </div>
@@ -298,6 +319,9 @@
         </div>
       </div>
     </div>
+   
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
@@ -324,352 +348,7 @@
         </div>
       </div>
     </div>
-    <div class="card has-table has-mobile-sort-spaced">
-      <header class="card-header">
-        <p class="card-header-title">
-          <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-          Order
-        </p>
-        <a href="#" class="card-header-icon">
-          <span class="icon"><i class="mdi mdi-reload"></i></span>
-        </a>
-      </header>
-      <div class="card-content">
-        <div class="b-table has-pagination">
-          <div class="table-wrapper has-mobile-cards">
-            <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth">
-              <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Item</th>
-                <th>Total</th>
-                <th>Tanggal masuk</th>
-                <th>Tanggal selesai</th>
-                <th>Alamat</th>
-                <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Arga</td>
-                <td data-label="Company">Salad buah</td>
-                <td data-label="City">Rp300.000</td>
-                <!--<td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="79">79</progress>
-                </td>-->
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Oct 25, 2020">Apr 10, 2024</small>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Oct 25, 2020">Apr 11, 2024</small>
-                </td>
-                <td data-label="City">Banguntapan</td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/felicita-yundt.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Farhan</td>
-                <td data-label="Company">Ayam Bakar</td>
-                <td data-label="City">Rp500.000</td>
-                <!--<td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="67">67</progress>
-                </td>-->
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Oct 25, 2020">Apr 15, 2024</small>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Jan 8, 2020">Apr 16, 2024</small>
-                </td>
-                <td data-label="City">Ngemplak</td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/mr-larry-satterfield-v.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Hanif</td>
-                <td data-label="Company">Salted Egg Chicken</td>
-                <td data-label="City">Rp450.000</td>
-                <!--<td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="16">16</progress>
-                </td>-->
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Oct 25, 2020">Apr 13, 2024</small>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Dec 18, 2020">Apr 14, 2024</small>
-                </td>
-                <td data-label="City">Umbulharjo</td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <!--<tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/mr-broderick-kub.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Mr. Broderick Kub</td>
-                <td data-label="Company">Kshlerin, Bauch and Ernser</td>
-                <td data-label="City">New Kirstenport</td>
-                <td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="71">71</progress>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Sep 13, 2020">Sep 13, 2020</small>
-                </td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/barry-weber.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Barry Weber</td>
-                <td data-label="Company">Schulist, Mosciski and Heidenreich</td>
-                <td data-label="City">East Violettestad</td>
-                <td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="80">80</progress>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Jul 24, 2020">Jul 24, 2020</small>
-                </td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/bert-kautzer-md.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Bert Kautzer MD</td>
-                <td data-label="Company">Gerhold and Sons</td>
-                <td data-label="City">Mayeport</td>
-                <td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="62">62</progress>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Mar 30, 2020">Mar 30, 2020</small>
-                </td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/lonzo-steuber.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Lonzo Steuber</td>
-                <td data-label="Company">Skiles Ltd</td>
-                <td data-label="City">Marilouville</td>
-                <td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="17">17</progress>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Feb 12, 2020">Feb 12, 2020</small>
-                </td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/jonathon-hahn.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Jonathon Hahn</td>
-                <td data-label="Company">Flatley Ltd</td>
-                <td data-label="City">Billiemouth</td>
-                <td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="74">74</progress>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Dec 30, 2020">Dec 30, 2020</small>
-                </td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/ryley-wuckert.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Ryley Wuckert</td>
-                <td data-label="Company">Heller-Little</td>
-                <td data-label="City">Emeraldtown</td>
-                <td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="54">54</progress>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Jun 28, 2020">Jun 28, 2020</small>
-                </td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="is-image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/sienna-hayes.svg" class="is-rounded">
-                  </div>
-                </td>
-                <td data-label="Name">Sienna Hayes</td>
-                <td data-label="Company">Conn, Jerde and Douglas</td>
-                <td data-label="City">Jonathanfort</td>
-                <td data-label="Progress" class="is-progress-cell">
-                  <progress max="100" class="progress is-small is-primary" value="55">55</progress>
-                </td>
-                <td data-label="Created">
-                  <small class="has-text-grey is-abbr-like" title="Mar 7, 2020">Mar 7, 2020</small>
-                </td>
-                <td class="is-actions-cell">
-                  <div class="buttons is-right">
-                    <button class="button is-small is-primary" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>-->
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="notification">
-            <div class="level">
-              <div class="level-left">
-                <div class="level-item">
-                  <div class="buttons has-addons">
-                    <button type="button" class="button is-active">1</button>
-                    <button type="button" class="button">2</button>
-                    <button type="button" class="button">3</button>
-                  </div>
-                </div>
-              </div>
-              <div class="level-right">
-                <div class="level-item">
-                  <small>Page 1 of 3</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <footer class="footer">
-    <div class="container-fluid">
-      <div class="level">
-        <div class="level-left">
-          <div class="level-item">
-            © 2024, HealthyLifeWithHealthyFood
-          </div>
-          <div class="level-item">
-            <a href="https://github.com/vikdiesel/admin-one-bulma-dashboard" style="height: 20px">
-              <img src="https://img.shields.io/github/v/release/vikdiesel/admin-one-bulma-dashboard?color=%23999">
-            </a>
-          </div>
-        </div>
-        <!--<div class="level-right">
-          <div class="level-item">
-            <div class="logo">
-              <a href="https://justboil.me"><img src="img/justboil-logo.svg" alt="JustBoil.me"></a>
-            </div>
-          </div>
-        </div>-->
-      </div>
-    </div>
+   
   </footer>
 </div>
 
@@ -699,6 +378,22 @@
 
 <!-- Icons below are for demo only. Feel free to use any icon pack. Docs: https://bulma.io/documentation/elements/icon/ -->
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
+<h1>Bar Chart</h1>
+<canvas id="myChart"></canvas>
+
+<script>
+  var aa = <?php echo $chart_data; ?>;
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var chartData = JSON.parse(aa);  // Removed single quotes and added semicolon
+
+  // Chart configuration using Chart.js
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    // Customize chart options here (colors, labels, etc.)
+  });
+</script>
+
 </body>
 </html>
 <?php
