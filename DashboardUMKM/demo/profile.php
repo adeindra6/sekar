@@ -142,6 +142,12 @@
           </a>
         </li>
         <li>
+          <a href="gudang.php" class="has-icon">
+            <span class="icon"><i class="mdi mdi-warehouse"></i></span>
+            <span class="menu-item-label">Gudang</span>
+          </a>
+        </li>
+        <li>
           <a href="forms.php" class="has-icon">
             <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
             <span class="menu-item-label">Forms</span>

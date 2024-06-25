@@ -1,12 +1,7 @@
 
 <?php
-  require_once("../../config/koneksi.php");
   session_start();
-  $sql = "SELECT * FROM item_barang"; // Replace with your actual table name
-  $result = mysqli_query($conn, $sql);
-  $datanya = mysqli_fetch_all($result,MYSQLI_ASSOC);
-  print_r($datanya);
-  
+
   // Check if user is logged in and has the 'user' role
   if (isset($_SESSION['username']) && $_SESSION['role'] === 'umkm') {
 ?>
@@ -16,7 +11,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tables - Admin UMKM</title>
+  <title>Gudang - Admin UMKM</title>
 
   <!-- Bulma is included -->
   <link rel="stylesheet" href="css/main.min.css">
@@ -140,13 +135,13 @@
       <p class="menu-label">Menu</p>
       <ul class="menu-list">
         <li>
-          <a href="tables.php" class="is-active has-icon">
+          <a href="tables.php" class="has-icon">
             <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span>
             <span class="menu-item-label">Tables</span>
           </a>
         </li>
         <li>
-          <a href="gudang.php" class="has-icon">
+          <a href="gudang.php" class="is-active has-icon">
             <span class="icon"><i class="mdi mdi-warehouse"></i></span>
             <span class="menu-item-label">Gudang</span>
           </a>
@@ -208,7 +203,7 @@
         <div class="level-item">
           <ul>
             <li>Admin</li>
-            <li>Tables</li>
+            <li>Gudang</li>
           </ul>
         </div>
       </div>
@@ -229,7 +224,7 @@
       <div class="level">
         <div class="level-left">
           <div class="level-item"><h1 class="title">
-            Responsive Tables
+            List Gudang
           </h1></div>
         </div>
         <div class="level-right" style="display: none;">
@@ -245,7 +240,7 @@
           <div class="level-item">
             <div>
               <span class="icon"><i class="mdi mdi-buffer default"></i></span>
-              <b>Responsive table</b>
+              <b>List Gudang</b>
             </div>
           </div>
         </div>
@@ -287,10 +282,7 @@
               </tr>
               </thead>
               <tbody>
-                <?php 
-                foreach($datanya as $i){
-                  ?>
-                   <!-- <tr>
+              <tr>
                 <td class="is-checkbox-cell">
                   <label class="b-checkbox checkbox">
                     <input type="checkbox" value="false">
@@ -302,13 +294,13 @@
                     <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="is-rounded">
                   </div>
                 </td>
-                <td data-label="Name">ASAS</td>
+                <td data-label="Name">Arga</td>
                 <td data-label="Company">Salad Buah</td>
-                <td data-label="City">Rp300.000</td> -->
+                <td data-label="City">Rp300.000</td>
                 <!--<td data-label="Progress" class="is-progress-cell">
                   <progress max="100" class="progress is-small is-primary" value="79">79</progress>
                 </td>-->
-                <!-- <td data-label="Created">
+                <td data-label="Created">
                   <small class="has-text-grey is-abbr-like" title="Oct 25, 2020">Apr 10, 2024</small>
                 </td>
                 <td data-label="Created">
@@ -325,14 +317,79 @@
                     </button>
                   </div>
                 </td>
-              </tr> -->
-                  <?php
-                  
-                }
-                ?>
-            
-             
-            
+              </tr>
+              <tr>
+                <td class="is-checkbox-cell">
+                  <label class="b-checkbox checkbox">
+                    <input type="checkbox" value="false">
+                    <span class="check"></span>
+                  </label>
+                </td>
+                <td class="is-image-cell">
+                  <div class="image">
+                    <img src="https://avatars.dicebear.com/v2/initials/felicita-yundt.svg" class="is-rounded">
+                  </div>
+                </td>
+                <td data-label="Name">Farhan</td>
+                <td data-label="Company">Ayam Bakar</td>
+                <td data-label="City">Rp500.000</td>
+                <!--<td data-label="Progress" class="is-progress-cell">
+                  <progress max="100" class="progress is-small is-primary" value="67">67</progress>
+                </td>-->
+                <td data-label="Created">
+                  <small class="has-text-grey is-abbr-like" title="Jan 8, 2020">Apr 15, 2024</small>
+                </td>
+                <td data-label="Created">
+                  <small class="has-text-grey is-abbr-like" title="Jan 8, 2020">Apr 16, 2024</small>
+                </td>
+                <td data-label="City">Ngemplak</td>
+                <td class="is-actions-cell">
+                  <div class="buttons is-right">
+                    <button class="button is-small is-primary" type="button">
+                      <span class="icon"><i class="mdi mdi-eye"></i></span>
+                    </button>
+                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
+                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="is-checkbox-cell">
+                  <label class="b-checkbox checkbox">
+                    <input type="checkbox" value="false">
+                    <span class="check"></span>
+                  </label>
+                </td>
+                <td class="is-image-cell">
+                  <div class="image">
+                    <img src="https://avatars.dicebear.com/v2/initials/mr-larry-satterfield-v.svg" class="is-rounded">
+                  </div>
+                </td>
+                <td data-label="Name">Hanif</td>
+                <td data-label="Company">Salted Egg Chicken</td>
+                <td data-label="City">Rp450.000</td>
+                <!--<td data-label="Progress" class="is-progress-cell">
+                  <progress max="100" class="progress is-small is-primary" value="16">16</progress>
+                </td>-->
+                <td data-label="Created">
+                  <small class="has-text-grey is-abbr-like" title="Dec 18, 2020">Apr 13, 2024</small>
+                </td>
+                <td data-label="Created">
+                  <small class="has-text-grey is-abbr-like" title="Dec 18, 2020">Apr 14, 2024</small>
+                </td>
+                <td data-label="City">Umbulharjo</td>
+                <td class="is-actions-cell">
+                  <div class="buttons is-right">
+                    <button class="button is-small is-primary" type="button">
+                      <span class="icon"><i class="mdi mdi-eye"></i></span>
+                    </button>
+                    <button class="button is-small is-danger jb-modal" data-target="sample-modal" type="button">
+                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
               <!--<tr>
                 <td class="is-checkbox-cell">
                   <label class="b-checkbox checkbox">
