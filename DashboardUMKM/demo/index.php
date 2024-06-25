@@ -15,23 +15,59 @@ $result2 = mysqli_query($conn, $sql2);
 
 // Extract data into an array
 $data2 = array();
-$row = mysqli_fetch_assoc($result2);
-  print_r($row);
-  $data2[] = array("label" => $row["item_pembelian"], "value" => $row["jumlah_pembelian"]);
 
-print_r($data2);
+if ($result2 && mysqli_num_rows($result2) > 0) {
+    while ($row = mysqli_fetch_assoc($result2)) {
+        $data2[] = array("y" => $row["jumlah_pembelian"], "label" => $row["item_pembelian"]);
+    }
+}
+
+
 $chart_data = json_encode($data2);
-print_r($chart_data);
+$dataPoints = array( 
+	array("y" => 7,"label" => "March" ),
+	array("y" => 12,"label" => "April" ),
+	array("y" => 28,"label" => "May" ),
+	array("y" => 18,"label" => "June" ),
+	array("y" => 41,"label" => "July" )
+);
+
   if (isset($_SESSION['username']) && $_SESSION['role'] === 'umkm') {
 ?>
 <!DOCTYPE html>
 <html lang="en" class="has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded">
 <head>
+<script>
+window.onload = function() {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	
+	axisY: {
+		title: "Jumlah",
+	
+    
+    
+	},
+	data: [{
+		type: "column",
+		
+		indexLabel: "{y}",
+		indexLabelPlacement: "inside",
+		indexLabelFontWeight: "bolder",
+		indexLabelFontColor: "white",
+		dataPoints: <?php echo json_encode($data2, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin UMKM</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
 
   <!-- Bulma is included -->
   <link rel="stylesheet" href="css/main.min.css">
@@ -319,6 +355,7 @@ print_r($chart_data);
         </div>
       </div>
     </div>
+
    
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     
@@ -326,13 +363,15 @@ print_r($chart_data);
       <header class="card-header">
         <p class="card-header-title">
           <span class="icon"><i class="mdi mdi-finance"></i></span>
-          Performance
+          Item yang banyak terjual
         </p>
         <a href="#" class="card-header-icon">
           <span class="icon"><i class="mdi mdi-reload"></i></span>
         </a>
       </header>
-      <div class="card-content">
+      <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+      <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+      <!-- <div class="card-content">
         <div class="chart-area">
           <div style="height: 100%;">
             <div class="chartjs-size-monitor">
@@ -346,7 +385,7 @@ print_r($chart_data);
             <canvas id="big-line-chart" width="2992" height="1000" class="chartjs-render-monitor" style="display: block; height: 400px; width: 1197px;"></canvas>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
    
   </footer>
@@ -378,21 +417,7 @@ print_r($chart_data);
 
 <!-- Icons below are for demo only. Feel free to use any icon pack. Docs: https://bulma.io/documentation/elements/icon/ -->
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
-<h1>Bar Chart</h1>
-<canvas id="myChart"></canvas>
 
-<script>
-  var aa = <?php echo $chart_data; ?>;
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var chartData = JSON.parse(aa);  // Removed single quotes and added semicolon
-
-  // Chart configuration using Chart.js
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: chartData,
-    // Customize chart options here (colors, labels, etc.)
-  });
-</script>
 
 </body>
 </html>
