@@ -24,8 +24,12 @@ if ($result->num_rows === 1) {
   $dataitem = $result->fetch_assoc(); 
   $totalBayar = $dataitem['harga_item'] * $JumlahPembelian;
   $itemPembelian = $dataitem['nama_item'];
+  $idItem = $dataitem['id'];
+  $penguranganStok = $dataitem['jumlah_item']-$JumlahPembelian;
   $sql = "INSERT INTO order_barang (id, nama_pembelian, item_pembelian, jumlah_pembelian, tanggal_pembelian, total_bayar) VALUES (NULL, '$namaPembeli', '$itemPembelian', '$JumlahPembelian', '$TanggalPembelian', '$totalBayar');";
+  $sql2 = "UPDATE `item_barang` SET `jumlah_item` = '$penguranganStok' WHERE `item_barang`.`id` ='$idItem';";
   mysqli_query($conn, $sql);
+  mysqli_query($conn, $sql2);
   header("Location: tables.php");
 
   

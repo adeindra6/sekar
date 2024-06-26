@@ -10,7 +10,7 @@ $datanya = $result->fetch_assoc();
 
 
 
-$sql2 = "SELECT item_pembelian, jumlah_pembelian FROM order_barang";
+$sql2 = "SELECT item_pembelian, SUM(jumlah_pembelian) AS total_pembelian FROM order_barang GROUP BY item_pembelian";
 $result2 = mysqli_query($conn, $sql2);
 
 // Extract data into an array
@@ -18,7 +18,7 @@ $data2 = array();
 
 if ($result2 && mysqli_num_rows($result2) > 0) {
     while ($row = mysqli_fetch_assoc($result2)) {
-        $data2[] = array("y" => $row["jumlah_pembelian"], "label" => $row["item_pembelian"]);
+        $data2[] = array("y" => $row["total_pembelian"], "label" => $row["item_pembelian"]);
     }
 }
 
